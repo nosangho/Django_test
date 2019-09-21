@@ -1,7 +1,12 @@
 <!doctype html>
+{% load static %}
 <head>
     <meta charset='UTF-8'
     <title>Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href={% static 'blog/bootstrap/bootstrap.css' %} media="screen">
+    <link rel="stylesheet" href={% static 'blog/_assets/css/custom.min.css'%}>
 </head>
 <body>
     <h1>hello</h1>
@@ -12,4 +17,9 @@
     
     <br>
     {% endfor %}
+
+    <script src={% static "blog/js/jquery.min.js" %}></script>
+    <script src={% static "blog/js/popper.min.js" %}></script>
+    <script src={% static "blog/bootstrap/bootstrap.min.js" %}></script>
+    <script src={% static "blog/_assets/js/custom.js" %}></script>
 </body>
