@@ -36,8 +36,6 @@
             </form>
         </div>
         </nav>
-        <br>
-
         <a class="navbar-brand" href="#">Start Bootstrap</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -78,17 +76,21 @@
                 <!-- Blog Post -->
                 {% for p in object_list %}
                 <div class="card mb-4">
-                <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
-                <div class="card-body">
-                    <h2 class="card-title">{{ p.title }}</h2>
-                    <p class="card-text">{{ p.content }}</p>
-                    <a href="#" class="btn btn-primary">Read More &rarr;</a>
-                </div>
-                <div class="card-footer text-muted">
-                    Posted on{{ p.created }} by {{ p.author }}
-                    <a href="#">Start Bootstrap</a>
-                </div>
-                </div>
+                {% if p.image %}
+                    <img class="card-img-top" src="{{ p.image.url }}" alt="Card image cap">
+                {% else %}
+                    <img class="card-img-top" src="https://picsum.photos/750/300/?random" alt="Card image cap"> 
+                {% endif %}    
+                    <div class="card-body">
+                        <h2 class="card-title">{{ p.title }}</h2>
+                        <p class="card-text">{{ p.content }}</p>
+                        <a href="#" class="btn btn-primary">Read More &rarr;</a>
+                    </div>
+                    <div class="card-footer text-muted">
+                        Posted on{{ p.created }} by {{ p.author }}
+                        <a href="#">Start Bootstrap</a>
+                    </div>
+                    </div>
                 {% endfor %}
             </div>
 
