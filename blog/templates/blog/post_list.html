@@ -1,27 +1,32 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-    <h1 class="my-4">Blog
+    <h1 class="my-8">Blog
     <small>Secondary Text</small>
     </h1>
 
     <!-- Blog Post -->
     {% for p in object_list %}
     <div class="card mb-4">
-    {% if p.image %}
-        <img class="card-img-top" src="{{ p.image.url }}" alt="Card image cap">
-    {% else %}
-        <img class="card-img-top" src="https://picsum.photos/750/300/?random" alt="Card image cap"> 
-    {% endif %}    
-        <div class="card-body">
-            <h2 class="card-title">{{ p.title }}</h2>
-            <p class="card-text">{{ p.content }}</p>
-            <a href="{{ p.get_absolute_url }}" class="btn btn-primary", id="read-more-post-{{p.pk}}">Read More &rarr;</a>
-        </div>
-        <div class="card-footer text-muted">
-            Posted on{{ p.created }} by {{ p.author }}
-            <a href="#">Start Bootstrap</a>
-        </div>
+        {% if p.image %}
+            <img class="card-img-top" src="{{ p.image.url }}" alt="Card image cap">
+        {% else %}
+            <img class="card-img-top" src="https://picsum.photos/750/300/?random" alt="Card image cap"> 
+        {% endif %}    
+            <div class="card-body">
+                {% if p.category %}
+                <span class="badge badge-primary float-right">{{ p.category }}</span>
+                {% else %}
+                <span class="badge badge-primary float-fight">미분류</span>
+                {% endif %}
+                <h2 class="card-title">{{ p.title }}</h2>
+                <p class="card-text">{{ p.content }}</p>
+                <a href="{{ p.get_absolute_url }}" class="btn btn-primary", id="read-more-post-{{p.pk}}">Read More &rarr;</a>
+            </div>
+            <div class="card-footer text-muted">
+                Posted on{{ p.created }} by {{ p.author }}
+                <a href="#">Start Bootstrap</a>
+            </div>
         </div>
     {% endfor %}
 {% endblock %}
