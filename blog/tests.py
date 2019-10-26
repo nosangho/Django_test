@@ -92,7 +92,39 @@ class TestModel(TestCase):
         self.assertEqual(tag_001.post_set.count(), 2)
         self.assertEqual(tag_001.post_set.first(), post_000)
         self.assertEqual(tag_001.post_set.last(), post_001)
+
+    def test_tag_page(self):
+
+        tag_000 = create_tag(name='good_boy')
+        tag_001 = create_tag(name='korea')
+
+        post_000 = create_post(
+            title = 'first post',
+            content = 'good day comando',
+            author = self.author_000,
+        )
+
+        post_001 = create_post(
+            title = 'Have a nice day post',
+            content = 'This is Friday',
+            author = self.author_000,
+        )
+
+        post_000.tags.add(tag_000)
+        post_000.tags.add(tag_001)
+        post_000.save()
+
+        post_001.tags.add(tag_001)
+        post_001.save()
         
+        response = self.client.get(tag_000.get_absolute_url())
+        self.assertEqual(response.status_code, 200)
+
+        soup = BeautifulSoup(response.content, 'html.parser')
+
+        main_div =soup.find('div', id='main_div ')
+        self.assertIn('#{}'.format(tag_000.name), main_div.text)
+        self.assertIn(post_000.titie, main_div.text)
 
 
     # def test_post(self):
