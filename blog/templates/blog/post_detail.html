@@ -32,13 +32,13 @@
 
     <!-- Preview Image -->
     {% if object.image %}
-    <img class="img-fluid rounded" src="https://picsum.photos/750/300/?random" alt="">
+    <img class="img-fluid rounded" src="{{ object.image.url }}" alt="{{ object.title }}">
     {% endif %}
 
     <hr>
 
     <!-- Post Content -->
-    {{ object.content }}
+    {{ object.get_markdown_content | safe }}
 
     <br>
     Tags : 
