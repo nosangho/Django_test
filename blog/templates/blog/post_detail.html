@@ -24,7 +24,7 @@
     <p>Posted on {{ object.created }}
 
     {% if request.user == object.author %}
-        <button type="button" class="btn btn-small btn-outline-secondary float-right">Edit</button>
+        <button type="button" class="btn btn-small btn-outline-secondary float-right" onclick="location.href='{{ object.get_update_url }}'">Edit</button>
     {% endif %}
     </p>    
     
