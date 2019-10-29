@@ -1,6 +1,6 @@
 from django.test import TestCase, Client
 from bs4 import BeautifulSoup
-from. models import Post, Category, Tag
+from. models import Post, Category, Tag, Comment
 from django.utils import timezone
 from django.contrib.auth.models import User
 
@@ -32,6 +32,18 @@ def create_tag(name='test_tag'):
     tag.save()
     
     return tag
+
+def create_comment(post, text='a_comment', author=None):
+    if author is None:
+        author, is_create = User.objects.get_or_create(
+            username = 'guest',
+            password = 'guestpassword'
+        )
+    comment = Comment.objects.create(
+        post = post,
+        text = text,
+        author = author
+    )
 
 
 
